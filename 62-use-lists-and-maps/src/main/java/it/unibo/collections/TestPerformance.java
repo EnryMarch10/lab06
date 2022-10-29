@@ -1,5 +1,6 @@
 package it.unibo.collections;
 
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.TimeUnit;
@@ -13,6 +14,24 @@ public final class TestPerformance {
     private static final int ELEMS = 1_000_000;
 
     private TestPerformance() { }
+
+    public static void TestInsertingBeginningList(final List<Integer> list, final int elems) {
+        long time = System.nanoTime();
+        for (int i = 1; i <= elems; i++) {
+            list.add(0, i);
+        }
+        time = System.nanoTime() - time;
+        System.out.println( "Adding " + elems + " ints to head of " + list.getClass() + " took " + time + "ns (" + TimeUnit.NANOSECONDS.toMillis(time) + "ms)" );
+    }
+
+    public static void TestReadingMiddleList(final List<Integer> list, final int elems) {
+        long time = System.nanoTime();
+        for (int i = 0; i < elems; i++) {
+            list.get(list.size()/2);
+        }
+        time = System.nanoTime() - time;
+        System.out.println( "Reading " + elems + " ints int he middle of " + list.getClass() + " took " + time + "ns (" + TimeUnit.NANOSECONDS.toMillis(time) + "ms)" );
+    }
 
     /**
      * @param s
